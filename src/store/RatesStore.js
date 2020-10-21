@@ -50,12 +50,12 @@ export default class RatesStore {
   }
 
   getRate(code) {
-    return _.find(this.rates, { code }) || this.defaultRate;
+    return _.find(this.rates, { code });
   }
 
   getCurrentRate() {
     const currency = this.rootStore.configStore.config.currency;
-    return this.getRate(currency);
+    return this.getRate(currency) || this.defaultRate;
   }
 
   get isLoading() {
@@ -75,7 +75,7 @@ class Rate {
     this.id     = code;
     this.code   = code;
     this.value  = value;
-    this.symbol = consts.RATES[code].symbol;
+    this.symbol = _.get(consts, `RATES[${code}].symbol`, '');
 
     makeAutoObservable(this);
   }
