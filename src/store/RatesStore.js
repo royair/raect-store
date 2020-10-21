@@ -46,7 +46,7 @@ export default class RatesStore {
       });
     } finally {
       this._isLoading = false;
-    }d
+    }
   }
 
   getRate(code) {
